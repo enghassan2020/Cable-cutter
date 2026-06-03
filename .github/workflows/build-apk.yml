@@ -11,16 +11,16 @@ jobs:
     
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Java
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: '17'
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3
 
       - name: Generate Keystore
         run: |
@@ -41,7 +41,7 @@ jobs:
       - name: Create TWA Manifest
         run: |
           mkdir twa
-          cat > twa/twa-manifest.json << 'EOF'
+          cat > twa/twa-manifest.json << 'TWAEOF'
           {
             "packageId": "com.epiccontracting.cablecutter",
             "host": "enghassan2020.github.io",
@@ -70,7 +70,7 @@ jobs:
             "enableSiteSettingsShortcut": false,
             "splashScreenFadeOutDuration": 300
           }
-          EOF
+          TWAEOF
 
       - name: Build APK
         run: |
@@ -81,7 +81,7 @@ jobs:
           BUBBLEWRAP_KEY_PASSWORD: epiccable2024
 
       - name: Upload APK
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: Epic-Cable-Cutter-APK
           path: |
